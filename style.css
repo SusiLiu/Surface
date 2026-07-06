@@ -1,118 +1,166 @@
 body{
   margin:0;
   font-family: Georgia, serif;
-  background:#f6f1e6;
+  background:#f2efe7;
   overflow-x:hidden;
 }
 
-/* ===== NOISE (stable, no 404) ===== */
-body::after{
+/* ===== PAPER NOISE ===== */
+body::before{
   content:"";
   position:fixed;
   inset:0;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(0,0,0,0.05), transparent 40%),
+    radial-gradient(circle at 90% 20%, rgba(0,0,0,0.05), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(0,0,0,0.04), transparent 50%);
   pointer-events:none;
-  opacity:0.06;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply;
+  opacity:0.6;
 }
 
-/* ===== START ===== */
+/* ===== START PAPER ===== */
 #start{
   height:100vh;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
 }
 
-.title{
-  font-size:110px;
+.paper{
+  background:white;
+  padding:60px;
+  border:1px solid black;
+  box-shadow:20px 20px 0 black;
   transform:rotate(-2deg);
-  letter-spacing:5px;
+  animation:float 4s ease-in-out infinite;
 }
 
-/* ===== SYSTEM BUTTONS ===== */
-.systems{
+.title{
+  font-size:90px;
+  letter-spacing:4px;
+}
+
+.subtitle{
+  opacity:0.6;
+}
+
+button{
+  margin-top:20px;
+  padding:10px 18px;
+  border:1px solid black;
+  background:white;
+  cursor:pointer;
+}
+
+/* ===== STAGE (COLLAGE ENTRANCE) ===== */
+.stage{
   display:flex;
   justify-content:center;
   gap:60px;
-  margin-top:20px;
+  margin-top:40px;
 }
 
-.systems div{
-  padding:18px 28px;
-  background:white;
+/* ===== TILES (BIG COLLAGE PIECES) ===== */
+.tile{
+  width:200px;
+  height:140px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   border:1px solid black;
-  box-shadow:10px 10px 0 black;
+  box-shadow:15px 15px 0 black;
   cursor:pointer;
-  transition:0.25s;
+  transition:0.4s;
+  transform:rotate(-3deg);
+  background:white;
 }
 
-.systems div:hover{
-  transform:scale(1.15) rotate(-2deg);
-  box-shadow:14px 14px 0 black;
+.tile span{
+  font-size:20px;
+  letter-spacing:2px;
 }
 
-/* ===== COLLAGE GRID ===== */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  padding:60px;
+.tile:hover{
+  transform:scale(1.1) rotate(2deg);
+  box-shadow:25px 25px 0 black;
 }
 
+.academic{
+  background:linear-gradient(135deg,#fff,#e8f0ff);
+}
+
+.life{
+  background:linear-gradient(135deg,#fff,#fff3e8);
+}
+
+/* ===== VIEW COLLAGE GRID (IRREGULAR FEEL) ===== */
+#view{
+  margin-top:60px;
+  padding:40px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+}
+
+/* ===== CARDS (MAGAZINE CUTOUT STYLE) ===== */
 .card{
+  width:160px;
+  height:160px;
   background:white;
   border:1px solid black;
-  box-shadow:8px 8px 0 black;
-  padding:26px;
+  box-shadow:12px 12px 0 black;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   cursor:pointer;
-  transition:0.25s;
-  transform:rotate(-1deg);
+  transform:rotate(calc(var(--r)));
+  animation:pop 0.4s ease;
 }
 
-.card:nth-child(2n){
-  transform:rotate(1deg);
+.card:nth-child(odd){
+  --r:-2deg;
+}
+
+.card:nth-child(even){
+  --r:2deg;
 }
 
 .card:hover{
-  transform:translateY(-10px) rotate(-3deg);
+  transform:scale(1.15) rotate(0deg);
 }
 
 /* ===== SUBJECT PAGE ===== */
 .subject{
-  max-width:900px;
+  max-width:800px;
   margin:auto;
-  padding:50px;
-}
-
-button{
-  margin-top:12px;
-  padding:10px 16px;
-  border:1px solid black;
+  padding:40px;
   background:white;
-  cursor:pointer;
+  border:1px solid black;
+  box-shadow:20px 20px 0 black;
+  animation:slide 0.5s ease;
 }
 
-/* ===== BACKDROP (DESKTOP COLLAGE WORLD) ===== */
-.backdrop{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-  opacity:0.28;
-  filter:contrast(1.1) grayscale(1);
+/* ===== ANIMATIONS ===== */
+@keyframes float{
+  0%,100%{transform:rotate(-2deg) translateY(0)}
+  50%{transform:rotate(-2deg) translateY(-10px)}
 }
 
-.backdrop.academic{
-  background:
-    radial-gradient(circle at 20% 30%, #fff, transparent 60%),
-    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
-  background-size:cover;
+@keyframes pop{
+  from{transform:scale(0.6) rotate(-5deg);opacity:0}
+  to{transform:scale(1) rotate(var(--r));opacity:1}
 }
 
-.backdrop.life{
-  background:
-    radial-gradient(circle at 70% 40%, #fff, transparent 60%),
-    url("https://images.unsplash.com/photo-1520975922203-b0a6a2c1b9f7");
-  background-size:cover;
+@keyframes slide{
+  from{transform:translateY(40px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+/* ===== TOPBAR ===== */
+.topbar{
+  text-align:center;
+  margin-top:20px;
 }
