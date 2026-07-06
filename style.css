@@ -70,3 +70,63 @@ textarea {
 }
 
 .hidden { display:none; }
+
+body {
+  background: #f4f1ea;
+  overflow-x: hidden;
+}
+
+/* ===== COLLAGE BACKDROP SYSTEM ===== */
+
+.backdrop {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  opacity:0.25;
+  background-size: cover;
+  filter: grayscale(1) contrast(1.2);
+}
+
+/* Academic desk */
+.backdrop.academic {
+  background:
+    radial-gradient(circle at 20% 30%, #fff 0%, transparent 50%),
+    url("https://images.unsplash.com/photo-1581091012184-7c6f0b1b5f7b");
+  background-size: cover;
+}
+
+/* Life desk */
+.backdrop.life {
+  background:
+    radial-gradient(circle at 60% 40%, #fff 0%, transparent 60%),
+    url("https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba");
+  background-size: cover;
+}
+
+/* SYSTEM hover glow */
+.systems div {
+  position: relative;
+  z-index: 2;
+}
+
+.systems div:hover {
+  box-shadow: 10px 10px 0 black;
+  transform: scale(1.12) rotate(-1deg);
+  transition: 0.3s;
+}
+
+/* collage noise layer */
+body::after {
+  content:"";
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  background:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:0.12;
+}
