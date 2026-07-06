@@ -1,3 +1,11 @@
+function setBackdrop(type){
+  let old = document.querySelector(".backdrop");
+  if(old) old.remove();
+
+  let div = document.createElement("div");
+  div.className = "backdrop " + type;
+  document.body.appendChild(div);
+}
 const academic = [
   {name:"Science"},
   {name:"Arts"},
