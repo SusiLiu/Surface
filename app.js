@@ -1,147 +1,95 @@
 
-/* =========================
-   DATA CORE
-========================= */
+/* ===== DATA ===== */
 
 const academic = [
-  { name: "Science" },
-  { name: "Arts" },
-  { name: "Humanities" },
-  { name: "Philosophy" }
+  {name:"Science"},
+  {name:"Arts"},
+  {name:"Humanities"},
+  {name:"Philosophy"}
 ];
 
 const life = [
-  { name: "Life" },
-  { name: "Games" },
-  { name: "Sports" },
-  { name: "Internet" }
+  {name:"Life"},
+  {name:"Games"},
+  {name:"Sports"},
+  {name:"Internet"}
 ];
 
 const subjects = {
-  Science: {
-    q: "How does reality behave?",
-    career: "Science / Engineering / Medicine",
-    history: "From philosophy to physics",
-    cost: "High learning curve",
-    study: "Bio / Chem / Physics"
-  },
-  Arts: {
-    q: "How do we create meaning visually?",
-    career: "Design / Media / Fashion",
-    history: "Cave art → digital art",
-    cost: "Practice-heavy",
-    study: "Drawing / Design / Theory"
-  },
-  Philosophy: {
-    q: "What is existence?",
-    career: "Academia / Writing / Policy",
-    history: "Ancient → modern theory",
-    cost: "Abstract thinking",
-    study: "Logic / Ethics"
-  }
+  Science:{q:"Reality under structure",career:"Science / Engineering",history:"From Aristotle to physics",cost:"High",study:"Bio / Chem / Physics"},
+  Arts:{q:"Meaning through form",career:"Design / Media",history:"Cave art → modern",cost:"Medium",study:"Drawing / Design"},
+  Philosophy:{q:"What is existence?",career:"Academia / Writing",history:"Ancient → modern thought",cost:"High abstraction",study:"Logic / Ethics"},
+  Humanities:{q:"How humans build society",career:"IR / Law / Policy",history:"Civilization studies",cost:"Medium",study:"History / Sociology"}
 };
 
-/* =========================
-   START
-========================= */
+/* ===== START ===== */
 
-function start() {
-  document.getElementById("start").style.display = "none";
+function start(){
+  document.getElementById("start").style.display="none";
   document.getElementById("app").classList.remove("hidden");
 
-  const q = [
-    "What is knowledge?",
-    "What is reality?",
-    "Can systems think?",
-    "What is truth?"
-  ];
-
+  const q=["What is truth?","What is knowledge?","Can systems think?"];
   document.getElementById("question").innerText =
-    q[Math.floor(Math.random() * q.length)];
+    q[Math.floor(Math.random()*q.length)];
 }
 
-/* =========================
-   BACKDROP SYSTEM
-========================= */
+/* ===== BACKDROP ===== */
 
-function setBackdrop(type) {
-  let old = document.querySelector(".backdrop");
-  if (old) old.remove();
+function setBackdrop(type){
+  let old=document.querySelector(".backdrop");
+  if(old) old.remove();
 
-  let div = document.createElement("div");
-  div.className = "backdrop " + type;
-  document.body.appendChild(div);
+  let d=document.createElement("div");
+  d.className="backdrop "+type;
+  document.body.appendChild(d);
 }
 
-/* =========================
-   HOVER (DESK PREVIEW)
-========================= */
+/* ===== HOVER (V3 VISUAL CHANGE) ===== */
 
-function hoverSystem(type) {
+function hoverSystem(type){
   setBackdrop(type);
 
-  document.getElementById("view").innerHTML = `
+  document.getElementById("view").innerHTML=`
     <div style="padding:60px;">
-      <h2>${type.toUpperCase()}</h2>
-      <p>Entering a visual knowledge space...</p>
+      <h1 style="transform:rotate(-2deg)">
+        ${type.toUpperCase()} WORLD
+      </h1>
+      <p>Entering collage environment...</p>
     </div>
   `;
 }
 
-/* =========================
-   OPEN SYSTEM
-========================= */
+/* ===== OPEN SYSTEM ===== */
 
-function openSystem(type) {
+function openSystem(type){
   setBackdrop(type);
 
-  const data = type === "academic" ? academic : life;
+  const data = type==="academic"?academic:life;
 
-  let html = `<div class="grid">`;
+  let html=`<div class="grid">`;
 
-  data.forEach(i => {
-    html += `<div class="card" onclick="openSubject('${i.name}')">${i.name}</div>`;
+  data.forEach(i=>{
+    html+=`<div class="card" onclick="openSubject('${i.name}')">${i.name}</div>`;
   });
 
-  html += `</div>`;
+  html+=`</div>`;
 
-  document.getElementById("view").innerHTML = html;
+  document.getElementById("view").innerHTML=html;
 }
 
-/* =========================
-   SUBJECT PAGE
-========================= */
+/* ===== SUBJECT ===== */
 
-function openSubject(name) {
-  const s = subjects[name] || {
-    q: "No data",
-    career: "TBD",
-    history: "TBD",
-    cost: "TBD",
-    study: "TBD"
-  };
+function openSubject(name){
+  const s=subjects[name]||{q:"-",career:"-",history:"-",cost:"-",study:"-"};
 
-  document.getElementById("view").innerHTML = `
+  document.getElementById("view").innerHTML=`
     <div class="subject">
       <h1>${name}</h1>
-      <p><b>Question:</b> ${s.q}</p>
-      <p><b>Career:</b> ${s.career}</p>
-      <p><b>History:</b> ${s.history}</p>
-      <p><b>Cost:</b> ${s.cost}</p>
-      <p><b>Study:</b> ${s.study}</p>
-
-      <h3>Notes</h3>
-      <textarea id="note" style="width:100%;height:180px;"></textarea>
-      <button onclick="saveNote('${name}')">Save</button>
+      <p>${s.q}</p>
+      <p>${s.career}</p>
+      <p>${s.history}</p>
+      <p>${s.cost}</p>
+      <p>${s.study}</p>
     </div>
   `;
-}
-
-/* =========================
-   LOCAL STORAGE
-========================= */
-
-function saveNote(name) {
-  const v = document.getElementById("note").value;
-  localStorage.setItem(name, v);
 }
