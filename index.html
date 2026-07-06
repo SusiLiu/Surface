@@ -2,26 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Surface V3</title>
+<title>Surface</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div id="start">
-  <h1 class="title">SURFACE</h1>
-  <button onclick="start()">ENTER</button>
+  <div class="paper">
+    <h1 class="title">SURFACE</h1>
+    <p class="subtitle">a collage of knowledge</p>
+    <button onclick="start()">ENTER</button>
+  </div>
 </div>
 
 <div id="app" class="hidden">
 
-  <div class="top">
+  <div class="topbar">
     <h2 id="question"></h2>
   </div>
 
-  <div class="systems">
-    <div onmouseenter="hoverSystem('academic')" onclick="openSystem('academic')">Academic</div>
-    <div onmouseenter="hoverSystem('life')" onclick="openSystem('life')">Life</div>
+  <div class="stage">
+
+    <div class="tile academic" onclick="openSystem('academic')">
+      <span>ACADEMIC</span>
+    </div>
+
+    <div class="tile life" onclick="openSystem('life')">
+      <span>LIFE & SKILLS</span>
+    </div>
+
   </div>
 
   <div id="view"></div>
