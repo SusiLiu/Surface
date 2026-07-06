@@ -1,119 +1,118 @@
-body {
-  margin: 0;
+body{
+  margin:0;
   font-family: Georgia, serif;
-  background: #f5f1e8;
-  overflow-x: hidden;
+  background:#f6f1e6;
+  overflow-x:hidden;
 }
 
-/* ===== NOISE (SAFE INLINE, NO 404) ===== */
-body::after {
+/* ===== NOISE (stable, no 404) ===== */
+body::after{
   content:"";
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  position:fixed;
+  inset:0;
   pointer-events:none;
   opacity:0.06;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ===== START ===== */
-#start {
-  height: 100vh;
+#start{
+  height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
 }
 
-.title {
-  font-size: 100px;
-  transform: rotate(-2deg);
-  letter-spacing: 4px;
+.title{
+  font-size:110px;
+  transform:rotate(-2deg);
+  letter-spacing:5px;
 }
 
 /* ===== SYSTEM BUTTONS ===== */
-.systems {
+.systems{
   display:flex;
   justify-content:center;
-  gap: 50px;
-  margin-top: 20px;
+  gap:60px;
+  margin-top:20px;
 }
 
-.systems div {
-  background: rgba(255,255,255,0.9);
-  padding: 18px 26px;
-  box-shadow: 8px 8px 0 black;
-  cursor: pointer;
-  transition: 0.3s;
-  border: 1px solid black;
+.systems div{
+  padding:18px 28px;
+  background:white;
+  border:1px solid black;
+  box-shadow:10px 10px 0 black;
+  cursor:pointer;
+  transition:0.25s;
 }
 
-.systems div:hover {
-  transform: scale(1.12) rotate(-1deg);
-  box-shadow: 12px 12px 0 black;
+.systems div:hover{
+  transform:scale(1.15) rotate(-2deg);
+  box-shadow:14px 14px 0 black;
 }
 
-/* ===== GRID ===== */
-.grid {
+/* ===== COLLAGE GRID ===== */
+.grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap: 14px;
-  padding: 50px;
+  gap:16px;
+  padding:60px;
 }
 
-.card {
-  background: rgba(255,255,255,0.95);
-  padding: 26px;
-  box-shadow: 6px 6px 0 black;
-  border: 1px solid black;
+.card{
+  background:white;
+  border:1px solid black;
+  box-shadow:8px 8px 0 black;
+  padding:26px;
   cursor:pointer;
-  transition: 0.25s;
+  transition:0.25s;
+  transform:rotate(-1deg);
 }
 
-.card:hover {
-  transform: translateY(-6px) rotate(-1deg);
+.card:nth-child(2n){
+  transform:rotate(1deg);
 }
 
-/* ===== SUBJECT ===== */
-.subject {
-  padding: 50px;
-  max-width: 900px;
-  margin: auto;
+.card:hover{
+  transform:translateY(-10px) rotate(-3deg);
 }
 
-/* ===== BACKDROP (V3 DESK SYSTEM) ===== */
-.backdrop {
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+/* ===== SUBJECT PAGE ===== */
+.subject{
+  max-width:900px;
+  margin:auto;
+  padding:50px;
+}
+
+button{
+  margin-top:12px;
+  padding:10px 16px;
+  border:1px solid black;
+  background:white;
+  cursor:pointer;
+}
+
+/* ===== BACKDROP (DESKTOP COLLAGE WORLD) ===== */
+.backdrop{
+  position:fixed;
+  inset:0;
   z-index:-1;
-  opacity:0.25;
-  filter: contrast(1.1) grayscale(1);
+  opacity:0.28;
+  filter:contrast(1.1) grayscale(1);
 }
 
-.backdrop.academic {
+.backdrop.academic{
   background:
     radial-gradient(circle at 20% 30%, #fff, transparent 60%),
-    url("https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?auto=format&fit=crop&w=1200&q=60");
-  background-size: cover;
+    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
+  background-size:cover;
 }
 
-.backdrop.life {
+.backdrop.life{
   background:
     radial-gradient(circle at 70% 40%, #fff, transparent 60%),
-    url("https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=1200&q=60");
-  background-size: cover;
-}
-
-button {
-  margin-top: 12px;
-  padding: 10px 16px;
-  border: 1px solid black;
-  background: white;
-  cursor: pointer;
+    url("https://images.unsplash.com/photo-1520975922203-b0a6a2c1b9f7");
+  background-size:cover;
 }
